@@ -1,0 +1,130 @@
+import numpy as np
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+
+# Define payoff functions
+def E_a1(q1, q2):
+    return 7.7 - 3.3 * q1 + 5.2 * q2
+
+def E_a2(q1, q2):
+    return 5 + 2.5 * q1 - 2.5 * q2
+
+def E_a3(alpha, q1, q2):
+    return 2.5 * alpha + 0.5 * alpha * q1 - 0.5 * alpha * q2
+
+# Setup the grid for q1 and q2
+q1_values = np.linspace(0, 1, 50)
+q2_values = np.linspace(0, 1, 50)
+q1, q2 = np.meshgrid(q1_values, q2_values)
+
+# Apply the constraint q1 + q2 <= 1
+condition = (q1 + q2 <= 1)
+
+# Compute payoff surfaces
+alpha = 2.5  # Fixed alpha value
+E_a1_values = E_a1(q1, q2) * condition
+E_a2_values = E_a2(q1, q2) * condition
+E_a3_values = E_a3(alpha, q1, q2) * condition
+
+# Create the 3D plot
+fig = plt.figure(figsize=(8, 6))
+ax = fig.add_subplot(111, projection='3d')
+
+# Plot surfaces for each strategy
+ax.plot_surface(q1, q2, E_a1_values, cmap='Blues', alpha=0.7, label='E(a1)')
+ax.plot_surface(q1, q2, E_a2_values, cmap='Oranges', alpha=0.7, label='E(a2)')
+ax.plot_surface(q1, q2, E_a3_values, cmap='Purples', alpha=0.7, label='E(a3)')
+
+# Add labels and title
+ax.set_title('3D Payoff Surface for alpha = 2.5', fontsize=14)
+ax.set_xlabel('q1 (P of Player B choosing b1)', fontsize=12)
+ax.set_ylabel('q2 (P of Player B choosing b2)', fontsize=12)
+ax.set_zlabel('Expected Payoff', fontsize=12)
+
+# Adjust view angle for better visualization
+ax.view_init(elev=30, azim=40)
+
+# Show the plot
+plt.tight_layout()
+plt.show()
+
+
+alpha=1
+fig = plt.figure(figsize=(8, 6))
+ax = fig.add_subplot(111, projection='3d')
+
+# Calculate E(a3) for the current alpha
+E_a3_values = E_a3(alpha, q1, q2) * condition
+
+# Plot all three surfaces for Player A
+ax.plot_surface(q1, q2, E_a1(q1, q2) * condition, cmap='Blues', alpha=0.7, label='E(a1)')
+ax.plot_surface(q1, q2, E_a2(q1, q2) * condition, cmap='Oranges', alpha=0.7, label='E(a2)')
+ax.plot_surface(q1, q2, E_a3_values, cmap='Purples', alpha=0.7, label='E(a3)')
+
+# Set labels and title
+ax.set_title('Player A Payoff at Alpha = 1 (Game Start)', fontsize=14)
+ax.set_xlabel('q1 (P of Player B choosing b1)', fontsize=12)
+ax.set_ylabel('q2 (P of Player B choosing b2)', fontsize=12)
+ax.set_zlabel('Expected Payoff', fontsize=12)
+
+# Adjust view angle for better visualization
+ax.view_init(elev=30, azim=40)
+
+plt.tight_layout()
+plt.show()
+
+# Generate 3D plot for alpha = 6.45
+alpha = 6.45  # Set alpha value for the second graph
+
+fig = plt.figure(figsize=(8, 6))
+ax = fig.add_subplot(111, projection='3d')
+
+# Calculate E(a3) for the current alpha
+E_a3_values = E_a3(alpha, q1, q2) * condition
+
+# Plot all three surfaces with adjusted colors
+surface1 = ax.plot_surface(q1, q2, E_a1_values, cmap='Blues', alpha=0.7, label='E(a1)')
+surface2 = ax.plot_surface(q1, q2, E_a2_values, cmap='Oranges', alpha=0.7, label='E(a2)')
+surface3 = ax.plot_surface(q1, q2, E_a3_values, cmap='Purples', alpha=0.7, label='E(a3)')
+
+# Labels and title
+ax.set_title('3D Payoff Surface for alpha = 6.45', fontsize=14)
+ax.set_xlabel('q1 (P of Player B choosing b1)', fontsize=12)
+ax.set_ylabel('q2 (P of Player B choosing b2)', fontsize=12)
+ax.set_zlabel('Expected Payoff', fontsize=12)
+
+# Adjust view angle for better visualization
+ax.view_init(elev=30, azim=40)
+
+# Show the plot
+plt.tight_layout()
+plt.show()
+
+
+alpha = 14  # Set alpha value for the third graph
+
+fig = plt.figure(figsize=(8, 6))
+ax = fig.add_subplot(111, projection='3d')
+
+# Calculate E(a3) for the current alpha
+E_a3_values = E_a3(alpha, q1, q2) * condition
+
+# Plot all three surfaces with adjusted colors
+surface1 = ax.plot_surface(q1, q2, E_a1_values, cmap='Blues', alpha=0.7, label='E(a1)')
+surface2 = ax.plot_surface(q1, q2, E_a2_values, cmap='Oranges', alpha=0.7, label='E(a2)')
+surface3 = ax.plot_surface(q1, q2, E_a3_values, cmap='Purples', alpha=0.7, label='E(a3)')
+
+# Labels and title
+ax.set_title('3D Payoff Surface for alpha = 14', fontsize=14)
+ax.set_xlabel('q1 (P of Player B choosing b1)', fontsize=12)
+ax.set_ylabel('q2 (P of Player B choosing b2)', fontsize=12)
+ax.set_zlabel('Expected Payoff', fontsize=12)
+
+# Adjust view angle for better visualization
+ax.view_init(elev=30, azim=40)
+
+# Show the plot
+plt.tight_layout()
+plt.show()
+
+
